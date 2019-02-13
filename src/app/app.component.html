@@ -1,0 +1,77 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1 class="display-3">
+    Welcome to {{ title }}!
+  </h1>
+  <img width="300" alt="Angular Logo" src="https://png.pngtree.com/element_our/sm/20180329/sm_5abc881cb2505.png">
+</div>
+
+<div class="container">
+  <h1 class="display-4">List of Books</h1>
+    <ul *ngFor="let book of books">
+        <button (click)="deleteBook(book.id)" class="btn btn-danger float-right">x</button>
+        <li class="lead">{{book.name}}</li>
+          <ul>
+            <li class="lead">Author: {{book.author}}</li>
+            <li class="lead">Year: {{book.year_released}}</li>
+          </ul>
+    </ul>  
+
+  <form #addBookForm="ngForm">
+    <h1 class="display-4">Add Book</h1>
+    <div class="form-group">
+      <label class="lead" for="book_name">Book Name</label>
+      <input [(ngModel)]="addForm.name" type="text" class="form-control lead" id="book_name" aria-describedby="book_name" placeholder="Name of book" name="name">
+      <small id="book_name" class="form-text text-muted">From model, you inputed: {{addForm.name}}</small>
+    </div>
+    <div class="form-group">
+      <label class="lead" for="book_author">Author</label>
+      <input [(ngModel)]="addForm.author" type="test" class="form-control lead" id="book_author" placeholder="Author name" name="author">
+      <small id="book_author" class="form-text text-muted">From model, you inputed: {{addForm.author}}</small>
+    </div>
+    <div class="form-group">
+      <label class="lead" for="book_year_released">Year Released</label>
+      <input [(ngModel)]="addForm.year_released" type="text" class="form-control lead" id="book_year_released" placeholder="Year of release" name="year_released">
+      <small id="book_year_released" class="form-text text-muted">From model, you inputed: {{addForm.year_released}}</small>
+    </div>
+    <div class="btn-toolbar">
+        <button (click)="addBook()" type="button" class="btn btn-primary">Add</button>
+        <button (click)="clearForm()" type="button" class="btn btn-secondary">Clear</button>
+    </div>
+  </form>
+  <br/>
+  <form #editBookForm="ngForm">
+    <h1 class="display-4">Edit Book</h1>
+    <div class="form-group">
+      <label class="lead" for="selected_book">Selected Book</label>
+      <select [(ngModel)]="selected_book" class="form-control" id="selected_book" name="selected_book" (change)="selectBook(selected_book)">
+        <option value="none">--- Select book ---</option>
+        <option *ngFor="let book of books" value={{book.id}}>{{book.name}}</option>
+      </select>
+      <small id="book_name" class="form-text text-muted">From model, you inputed: {{'book_id ->' + selected_book}}</small>
+    </div>
+    <div class="form-group">
+      <label class="lead" for="book_name">Book Name</label>
+      <input [(ngModel)]="editForm.name" type="text" class="form-control lead" id="book_name" aria-describedby="book_name" placeholder="Name of book" name="name">
+      <small id="book_name" class="form-text text-muted">From model, you inputed: {{editForm.name}}</small>
+    </div>
+    <div class="form-group">
+      <label class="lead" for="book_author">Author</label>
+      <input [(ngModel)]="editForm.author" type="test" class="form-control lead" id="book_author" placeholder="Author name" name="author">
+      <small id="book_author" class="form-text text-muted">From model, you inputed: {{editForm.author}}</small>
+    </div>
+    <div class="form-group">
+      <label class="lead" for="book_year_released">Year Released</label>
+      <input [(ngModel)]="editForm.year_released" type="text" class="form-control lead" id="book_year_released" placeholder="Year of release" name="year_released">
+      <small id="book_year_released" class="form-text text-muted">From model, you inputed: {{editForm.year_released}}</small>
+    </div>
+    <div class="btn-toolbar">
+        <button (click)="editBook()" type="button" class="btn btn-primary">Edit</button>
+        <button (click)="clearForm()" type="button" class="btn btn-secondary">Clear</button>
+    </div>
+  </form>
+</div>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<router-outlet></router-outlet>
